@@ -1,6 +1,4 @@
 from flask import Flask, request, render_template
-from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, RadioField, SubmitField, SelectField, IntegerField
 import os
 import Storage
 import Application.API.Data as Data

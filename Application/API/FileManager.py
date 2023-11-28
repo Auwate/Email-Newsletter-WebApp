@@ -1,5 +1,4 @@
 import json
-import requests
 
 '''
     save_to_file: A function that takes two variables, data and
@@ -33,29 +32,3 @@ def read_from_file (file_name):
         jsonFile = json.load(file)
     print("Successfully read.\n")
     return jsonFile
-
-
-'''
-    get_api_key: Utilizes the read_from_file function to get
-    the API key found for each social media.
-    
-    filename -> A string variable that holds the location of the
-    file in storage.
-'''
-
-
-def get_api_key(filename):
-    read_from_file(filename)
-
-
-'''
-    get_api_data: Retrieves the data from each the 
-    
-    apikey -> 
-'''
-
-
-def get_api_data(apikey):
-    url = "http://api.airvisual.com/v2/nearest_city?key=" + apikey
-    data = requests.get(url).json()
-    save_to_file(data, 'air_quality.json')

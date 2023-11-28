@@ -1,8 +1,8 @@
-import os
 import requests
-import base64
 import Application.API.Outlook as Outlook
 import Application.Controller.Storage as Storage
+import Application.API.News as News
+import os
 
 
 APP_ID = 'e827a227-2bbd-45fc-85ff-5e3de94e4aff'
@@ -48,10 +48,67 @@ def createDraft (access_token, email, name, preferences):
             'importance': 'normal',
             'body': {
                 'contentType': 'HTML',
-                'content': '<b>Dear ' + name + ',<b>\n' + preferences
+                'content': '<b>Dear ' + name + ', here is today\'s newsletter.<b>\n' + grab_content(preferences)
             }
             # Attachments
         }
     }
 
     return [headers, request_body]
+
+
+def grab_content(preferences):
+
+    articles = News.getNews(os.getcwd()+'/api_keys.json', preferences)
+
+    html_filler = '''
+      <a href="{8}">
+      <b>{1}</b>
+      </a>
+      <br/>
+      <a href="{8}">
+      <img src="{0}">
+      </a>
+      <br/><br/>
+      <a href="{9}">
+      <b>{3}</b>
+      </a>
+      <br/>
+      <a href="{9}">
+      <img src="{2}">
+      </a>
+      <br/><br/>
+      <a href="{10}">
+      <b>{5}</b>
+      </a>
+      <br/>
+      <a href="{10}">
+      <img src="{4}">
+      </a>
+      <br/><br/>
+      <a href="{11}">
+      <b>{7}</b>
+      </a>
+      <br/>
+      <a href="{11}">
+      <img src="{6}">
+      </a>
+      <br/><br/>
+    '''
+
+    html_filler = html_filler.format(articles[0]['image'], articles[0]['title'],
+                       articles[1]['image'], articles[1]['title'],
+                       articles[2]['image'], articles[2]['title'],
+                       articles[3]['image'], articles[3]['title'],
+                       articles[0]['url'], articles[1]['url'],
+                       articles[2]['url'], articles[3]['url'],)
+
+    with open(os.getcwd()+'/templates/email_template.html', 'r') as file:
+        first_half = file.read()
+
+    with open(os.getcwd()+'/templates/email_template_2.html', 'r') as file:
+        second_half = file.read()
+
+    print(first_half + html_filler + second_half)
+
+    return first_half + html_filler + second_half
