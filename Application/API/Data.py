@@ -67,7 +67,7 @@ def grab_content(preferences):
       </a>
       <br/>
       <a href="{8}">
-      <img src="{0}">
+      <img src="{0}" alt="Image" title="Image" style="display:block" width="200" height="87">
       </a>
       <br/><br/>
       <a href="{9}">
@@ -75,7 +75,7 @@ def grab_content(preferences):
       </a>
       <br/>
       <a href="{9}">
-      <img src="{2}">
+      <img src="{2}" alt="Image" title="Image" style="display:block" width="200" height="87">
       </a>
       <br/><br/>
       <a href="{10}">
@@ -83,7 +83,7 @@ def grab_content(preferences):
       </a>
       <br/>
       <a href="{10}">
-      <img src="{4}">
+      <img src="{4}" alt="Image" title="Image" style="display:block" width="200" height="87">
       </a>
       <br/><br/>
       <a href="{11}">
@@ -91,7 +91,7 @@ def grab_content(preferences):
       </a>
       <br/>
       <a href="{11}">
-      <img src="{6}">
+      <img src="{6}" alt="Image" title="Image" style="display:block" width="200" height="87">
       </a>
       <br/><br/>
     '''
@@ -108,7 +108,5 @@ def grab_content(preferences):
 
     with open(os.getcwd()+'/templates/email_template_2.html', 'r') as file:
         second_half = file.read()
-
-    print(first_half + html_filler + second_half)
 
     return first_half + html_filler + second_half
