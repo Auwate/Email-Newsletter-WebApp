@@ -1,6 +1,6 @@
 # Email-Newsletter-WebApp
 
-This project utilizes predominantly Python and HTML, creating a simple fullstack project to allow a user to connect to a newsletter.
+This project utilizes Python and HTML to create a simple fullstack project to allow a user to connect to a newsletter.
 
 ## APIs
 
